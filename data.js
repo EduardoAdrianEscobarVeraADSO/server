@@ -144,8 +144,5 @@ const toggleSubmitButton = () => {
     }
 };
 
-// Escuchar el evento change en el checkbox
 terminos.addEventListener("change", toggleSubmitButton);
-
-// Inicializar el estado del botón al cargar la página
 toggleSubmitButton();
