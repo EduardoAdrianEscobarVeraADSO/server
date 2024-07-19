@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Formulario de Usuario</h2>
+        <form id="userForm">
+          <div class="form-group">
+            <label for="nameUser">Nombre:</label>
+            <input type="text" id="nameUser" name="nameUser" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Apellido:</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+          <div class="form-group">
+            <label for="tdoc">Tipo de Documento:</label>
+            <select id="tdoc" name="tdoc" required>
+              <option value="">Seleccionar...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Ndocument">Numero de documento:</label>
+            <input type="text" id="Ndocument" name="Ndocument" required>
+          </div>
+          <div class="form-group">
+            <label for="Ndocument">Numero de celular:</label>
+            <input type="text" id="Ntelefono" name="Ntelefono" required>
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" required>
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn">Enviar</button>
+          </div>
+        </form>
+      </div>
+      <div class="container">
+        <h2>Tabla de Datos</h2>
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Tipo de Documento</th>
+              <th>N de Documento</th>
+              <th>Correo Electrónico</th>
+              <th>Dirección</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+      <script type="module" src="data.js"></script>
+
+</body>
+</html>
