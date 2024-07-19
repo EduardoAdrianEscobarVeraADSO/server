@@ -1,5 +1,5 @@
 import { fetchDocumentos, fetchUsuarios } from "./module.js";
-import { cantidad } from "./module2.js";
+import { cantidad, validarCorreo, validarNumeros } from "./module2.js";
 
 
 // async function db() {
@@ -100,33 +100,26 @@ import { cantidad } from "./module2.js";
 // db();
 
 const nombre = document.querySelector("#nameUser");
-    const apellido = document.querySelector("#lastName");
-    const tdoc = document.querySelector("#tdoc");
-    const Ndoc = document.querySelector("#Ndocument");
-    const correo = document.querySelector("#correo");
-    const direccion = document.querySelector("#direccion");
-    const celular = document.querySelector("#Ntelefono");
+const apellido = document.querySelector("#lastName");
+const tdoc = document.querySelector("#tdoc");
+const Ndoc = document.querySelector("#Ndocument");
+const correoInput = document.querySelector("#correo");
+const direccion = document.querySelector("#direccion");
+const celular = document.querySelector("#Ntelefono");
+const terminos = document.querySelector("#terminos")
+const enviar = document.querySelector("#enviar")
 
-nombre.addEventListener("keypress",(event)=>{
-    SoloLetras(event);
-})
-nombre.addEventListener("blur",(event)=>{
-    cantidad(nombre);
-})
-apellido.addEventListener("keypress",(event)=>{
-    SoloLetras(event)
-    })
-apellido.addEventListener("blur", (event)=>{
-    cantidad(apellido)
-})
-Ndoc.addEventListener("keypress",(event) => {
-    SoloNumeros(event)
-})
 
-celular.addEventListener("keypress", (event)=>{
-    SoloNumeros(event)
-})
-correoInput.addEventListener("blur", ValidacionCorreo);
+nombre.addEventListener("keypress",(event)=> SoloLetras(event))
+nombre.addEventListener("input",(event)=> cantidad(nombre))
+apellido.addEventListener("keypress",(event)=> SoloLetras(event))
+apellido.addEventListener("input", (event)=> cantidad(apellido))
+Ndoc.addEventListener("keypress",(event) => SoloNumeros(event))
+celular.addEventListener("keypress", (event) => SoloNumeros (event))
+correoInput.addEventListener("input", () => validarCorreo(correoInput));
+celular.addEventListener("input", () => validarNumeros(celular))
+Ndoc.addEventListener("input", () => validarNumeros(Ndoc))
+
 
 const SoloLetras = function(event) {
     const regexLetras = /^[a-zA-Z\ ]{0,}$/;
@@ -142,16 +135,17 @@ const SoloNumeros = function (event) {
         }
 }
 
-const ValidacionCorreo = function(event) {
-    const correoV = event.target.value;
-    const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    
-    if (!regexCorreo.test(correoV)) {
-        event.target.classList.add("incorrecto");
-        event.target.classList.remove("correcto")
+const toggleSubmitButton = () => {
+    if (terminos.checked) {
+        enviar.disabled = false;   
     } else {
-        event.target.classList.remove("incorrecto");
-        event.target.classList.add("correcto")
+        enviar.disabled = true;
     }
 };
+
+// Escuchar el evento change en el checkbox
+terminos.addEventListener("change", toggleSubmitButton);
+
+// Inicializar el estado del botón al cargar la página
+toggleSubmitButton();
