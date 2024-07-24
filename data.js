@@ -1,113 +1,126 @@
-import { fetchDocumentos, fetchUsuarios } from "./module.js";
-import { cantidad, validarCorreo, validarNumeros } from "./module2.js";
+import { fetchDocumentos, fetchUsuarios } from "./Modulos/fetchs.js";
+import { validarNumeros } from "./Modulos/validarNumeros.js";
+import { validarCorreo } from "./Modulos/validarCorreos.js";
+import { cantidad } from "./Modulos/validarNombres.js";
+import { SoloLetras, SoloNumeros } from "./Modulos/validarBloquearTeclas.js";
+import { toggleSubmitButton } from "./Modulos/validacionCheckBox.js";
 
+async function db() {
+        const documentos = await fetchDocumentos();
+        const usuarios = await fetchUsuarios();
 
-// async function db() {
-//     const documentos = await fetchDocumentos();
-//         const usuarios = await fetchUsuarios();
+        console.log(documentos);
 
-//         const select = document.getElementById("tdoc");
+        const select = document.getElementById("tdoc");
 
-//         let tipo_doc = [];
+        let tipo_doc = [];
 
-//         documentos.forEach(tipo => {
-//             const option = document.createElement("option");
-//             option.value = tipo.id;
-//             option.textContent = tipo.name;
-//             select.appendChild(option);
-//             tipo_doc.push(tipo.name)
-//         });
-
-//         const tabla = document.querySelector("#dataTable tbody");
+        documentos.forEach(tipo => {
+            const option = document.createElement("option");
+            option.value = tipo.id;
+            option.textContent = tipo.name;
+            select.appendChild(option);
+            console.log(select);
+            tipo_doc.push(tipo.name)
+        });
+        console.log(tipo_doc);
+        const tabla = document.querySelector("#dataTable tbody");
     
-//         usuarios.forEach(tipo => {
+        usuarios.forEach(tipo => {
 
-//             const tr = document.createElement("tr");
+            const tr = document.createElement("tr");
 
-//             const tdnombre = document.createElement("td");
-//             tdnombre.textContent = tipo.nameUser;
+            const tdid = document.createElement("td");
+            tdid.textContent = tipo.id;
 
-//             const tdapellido = document.createElement("td");
-//             tdapellido.textContent = tipo.lastName;
+            const tdnombre = document.createElement("td");
+            tdnombre.textContent = tipo.nameUser;
 
-//             const tdtdocumento = document.createElement("td");
-//             tdtdocumento.textContent = tipo_doc[tipo.id - 1];
+            const tdapellido = document.createElement("td");
+            tdapellido.textContent = tipo.lastName;
 
-//             const tdnumdoc = document.createElement("td");
-//             tdnumdoc.textContent = tipo.Ndocumento;
+            const tdtdocumento = document.createElement("td");
+            tdtdocumento.textContent = tipo_doc[tipo.id - 1];
 
-//             const correo = document.createElement("td");
-//             correo.textContent = tipo.correo;
+            const tdnumdoc = document.createElement("td");
+            tdnumdoc.textContent = tipo.Ndocumento;
 
-//             const tddireccion = document.createElement("td");
-//             tddireccion.textContent = tipo.direccion;
+            const correo = document.createElement("td");
+            correo.textContent = tipo.correo;
 
-//             const btns = document.createElement("td");
-//             const buttonD = document.createElement("button");
-//             const buttonE = document.createElement("button")
-//             buttonD.textContent = "Eliminar";
-//             buttonD.classList.add("btn-delete");
-//             buttonE.textContent = "Editar";
-//             buttonE.classList.add("btn-edit");
-//             btns.appendChild(buttonD);
-//             btns.appendChild(buttonE);
+            const tddireccion = document.createElement("td");
+            tddireccion.textContent = tipo.direccion;
 
-//             tr.appendChild(tdnombre);
-//             tr.appendChild(tdapellido);
-//             tr.appendChild(tdtdocumento);
-//             tr.appendChild(tdnumdoc);
-//             tr.appendChild(correo);
-//             tr.appendChild(tddireccion);
-//             tr.appendChild(btns);
-//             tabla.appendChild(tr);
-//         });
+            const btns = document.createElement("td");
+            const buttonD = document.createElement("button");
+            const buttonE = document.createElement("button")
+            buttonD.textContent = "Eliminar";
+            buttonD.classList.add("btn-delete");
+            buttonE.textContent = "Editar";
+            buttonE.classList.add("btn-edit");
 
-//         let idUsuario = usuarios[usuarios.length -1].id
+            btns.appendChild(buttonD);
+            btns.appendChild(buttonE);
+            tr.appendChild(tdid);
+            tr.appendChild(tdnombre);
+            tr.appendChild(tdapellido);
+            tr.appendChild(tdtdocumento);
+            tr.appendChild(tdnumdoc);
+            tr.appendChild(correo);
+            tr.appendChild(tddireccion);
+            tr.appendChild(btns);
+            tabla.appendChild(tr);
+        });
 
-//         const formulario = document.querySelector("#userForm");
-//         formulario.addEventListener("submit", function(event){
-//             event.preventDefault();
+        let idUsuario = usuarios[usuarios.length -1].id
+
+        const formulario = document.querySelector("#userForm");
+        const nombre = document.querySelector("#nameUser");
+        const apellido = document.querySelector("#lastName");
+        const tdoc = document.querySelector("#tdoc");
+        const Ndoc = document.querySelector("#Ndocument");
+        const correoInput = document.querySelector("#correo");
+        const celular = document.querySelector("#Ntelefono");
+        const terminos = document.querySelector("#terminos")
+        const enviar = document.querySelector("#enviar")
+                
+        formulario.addEventListener("submit", function(event){
+            event.preventDefault();
             
+            let usuario = {};
+              usuario = {
+                "id": `${parseInt(idUsuario) + 1}`,
+                "nameUser": nombre.value,
+                "lastName": apellido.value,
+                "Ndocumento": parseInt(Ndoc.value),
+                "tdoc": parseInt(tdoc.value),
+                "correo": correoInput.value,
+                "direccion": direccion.value,
+                "Ntelefono": celular.value
 
-//         // const regexNombreApellido = /^[A-Za-zÁÉÍÓÚáéíóúÑñ]+$/;
-//         // const regexDocumento = /^[0-9]+$/;
-//         // const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//         // const regexDireccion = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]+$/;
-
-//         if(nombre === "" || apellido === "" || tdoc === "" || Ndoc === "" ||
-//             correo === "" || direccion === ""){
-//                 alert("Todos los campos son obligatorios")
-//             }
+              }
+              fetch("http://127.0.0.1:3000/users", {
+                method: "POST",
+                body: JSON.stringify(usuario)
+              })
+        })
         
-        
-//         const nombre = document.querySelector("#nameUser").value.trim();
-//             const apellido = document.querySelector("#lastName").value.trim();
-//             const tdoc = document.querySelector("#tdoc").value.trim();
-//             const Ndoc = document.querySelector("#Ndocument").value.trim();
-//             const correo = document.querySelector("#correo").value.trim();
-//             const direccion = document.querySelector("#direccion").value.trim();
-//             const letras = function(event) {
-//                 const regexLetras = /^[a-zA-Z\ ]{0,}+$/;
-//                 if (!regexLetras.test(event.key)) {
-//                     event.preventDefault();
-//                     }
-//             }
-//             nombre.addEventListener("keypress",(event)=>{
-//                 letras(event)
-//             });
-//     })}
+          const eliminar = document.querySelectorAll(".btn-delete");
+          eliminar.forEach(a=>{
+            a.addEventListener('click', function (event){
+                event.preventDefault();
+                let id = a.parentElement.parentElement.firstChild.textContent;
+                console.log(id);
+                fetch(`http://127.0.0.1:3000/users/${id}`, {
+                  method: "DELETE"
+                  
+                  
+                })
+    }
+)})}
+db();
 
-// db();
 
-const nombre = document.querySelector("#nameUser");
-const apellido = document.querySelector("#lastName");
-const tdoc = document.querySelector("#tdoc");
-const Ndoc = document.querySelector("#Ndocument");
-const correoInput = document.querySelector("#correo");
-const direccion = document.querySelector("#direccion");
-const celular = document.querySelector("#Ntelefono");
-const terminos = document.querySelector("#terminos")
-const enviar = document.querySelector("#enviar")
 
 
 nombre.addEventListener("keypress",(event)=> SoloLetras(event))
@@ -121,28 +134,7 @@ celular.addEventListener("input", () => validarNumeros(celular))
 Ndoc.addEventListener("input", () => validarNumeros(Ndoc))
 
 
-const SoloLetras = function(event) {
-    const regexLetras = /^[a-zA-Z\ ]{0,}$/;
-        
-    if (!(regexLetras.test(event.key))) {
-        event.preventDefault();
-    }
-}
-const SoloNumeros = function (event) {
-    const regexnums = /^[\d]{0,}$/;
-    if (!(regexnums.test(event.key))) {
-        event.preventDefault();
-        }
-}
 
 
-const toggleSubmitButton = () => {
-    if (terminos.checked) {
-        enviar.disabled = false;   
-    } else {
-        enviar.disabled = true;
-    }
-};
-
-terminos.addEventListener("change", toggleSubmitButton);
 toggleSubmitButton();
+

@@ -1,22 +1,44 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "nameUser": "Eduardo",
       "lastName": "Escobar",
       "tdoc": "2",
       "Ndocumento": "1142714091",
       "correo": "eduardo@gmail.com",
-      "direccion": "cra 9 #29-55"
+      "direccion": "cra 9 #29-55",
+      "Ntelefono": "3158334874"
     },
     {
-      "id": 2,
-      "nombre": "eduardo",
-      "apellido": "escobar",
-      "documento": 12121221212,
-      "tipo_doc": 1,
-      "correo": "eduardo@gmail.com",
-      "direccion": "edeuhaohioef"
+      "id": "2",
+      "nameUser": "Jon",
+      "lastName": "Doe",
+      "Ndocumento": 1142714091,
+      "tdoc": 2,
+      "correo": "test@example.us",
+      "direccion": "1600 Amphitheatre Parkway",
+      "Ntelefono": "6019521325"
+    },
+    {
+      "id": "4",
+      "nameUser": "eded",
+      "lastName": "aBel",
+      "Ndocumento": 1234123412,
+      "tdoc": 1,
+      "correo": "abeltrogloglo@gmail.com",
+      "direccion": "troglodita",
+      "Ntelefono": "3321124346"
+    },
+    {
+      "id": "5",
+      "nameUser": "João",
+      "lastName": "Souza Silva",
+      "Ndocumento": 1142714091,
+      "tdoc": 1,
+      "correo": "teste@exemplo.u",
+      "direccion": "Av. dos Andradas, 3000",
+      "Ntelefono": "3121286800"
     }
   ],
   "docs": [
