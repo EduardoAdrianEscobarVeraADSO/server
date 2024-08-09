@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "nameUser": "Eduardo",
+      "lastName": "Escobar",
+      "tdoc": "2",
+      "Ndocumento": "1142714091",
+      "correo": "eduardo@gmail.com",
+      "direccion": "cra 9 #29-55",
+      "Ntelefono": "3158334874"
+    },
+    {
+      "nameUser": "Eduardo",
+      "lastName": "Escobar",
+      "tdoc": "1",
+      "Ndocumento": "1142714091",
+      "correo": "eduardo@gmail.com",
+      "direccion": "cra 9 #29-55",
+      "Ntelefono": "3158334874"
+    }
+  ],
+  "docs": [
+    {
+      "id": "1",
+      "name": "C.C"
+    },
+    {
+      "id": "2",
+      "name": "T.I"
+    }
+  ]
+}
